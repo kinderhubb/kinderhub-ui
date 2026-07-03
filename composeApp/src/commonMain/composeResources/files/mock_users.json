@@ -1,0 +1,64 @@
+{
+  "users": [
+    {
+      "id": "user_001",
+      "email": "sarah@example.com",
+      "password": "password123",
+      "firstName": "Sarah",
+      "lastName": "Bennett",
+      "isEmailVerified": true,
+      "children": [
+        {
+          "id": "child_001",
+          "firstName": "Ella",
+          "dateOfBirth": "2019-03-15",
+          "age": 5,
+          "avatarColor": "Accent"
+        },
+        {
+          "id": "child_002",
+          "firstName": "Max",
+          "dateOfBirth": "2016-07-22",
+          "age": 8,
+          "avatarColor": "Sunshine"
+        }
+      ],
+      "location": {
+        "postcode": "SW11",
+        "city": "London",
+        "isFromGps": true
+      },
+      "savedPaymentMethods": [
+        {
+          "id": "pm_001",
+          "type": "ApplePay",
+          "isDefault": true
+        },
+        {
+          "id": "pm_002",
+          "type": "Card",
+          "last4": "4242",
+          "brand": "Visa",
+          "isDefault": false
+        }
+      ]
+    },
+    {
+      "id": "user_002",
+      "email": "james@example.com",
+      "password": "password123",
+      "firstName": "James",
+      "lastName": "Wilson",
+      "isEmailVerified": true,
+      "children": [],
+      "location": null,
+      "savedPaymentMethods": []
+    }
+  ],
+  "testCredentials": {
+    "validEmail": "sarah@example.com",
+    "validPassword": "password123",
+    "invalidEmail": "invalid@example.com",
+    "invalidPassword": "wrongpassword"
+  }
+}

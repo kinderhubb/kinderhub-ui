@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">KinderHub</string>
+
+    <!-- Navigation -->
+    <string name="nav_discover">Aimsigh</string>
+    <string name="nav_bookings">Áirithintí</string>
+    <string name="nav_my_bookings">Mo Chuid Áirithintí</string>
+    <string name="nav_messages">Teachtaireachtaí</string>
+    <string name="nav_account">Cuntas</string>
+
+    <!-- Auth Screen -->
+    <string name="auth_welcome_back">Fáilte ar ais</string>
+    <string name="auth_sign_in_to_continue">Sínigh isteach le leanúint ar aghaidh</string>
+    <string name="auth_continue_with_apple">Lean ar aghaidh le Apple</string>
+    <string name="auth_continue_with_google">Lean ar aghaidh le Google</string>
+    <string name="auth_or_use_email">nó úsáid ríomhphost</string>
+    <string name="auth_email">Ríomhphost</string>
+    <string name="auth_email_placeholder">sarah@example.com</string>
+    <string name="auth_password">Pasfhocal</string>
+    <string name="auth_password_placeholder">Cuir isteach do phasfhocal</string>
+    <string name="auth_forgot_password">Pasfhocal dearmadta?</string>
+    <string name="auth_log_in">Logáil isteach</string>
+    <string name="auth_sign_up">Cláraigh</string>
+    <string name="auth_no_account">Níl cuntas agat?</string>
+    <string name="auth_have_account">Tá cuntas agat cheana féin?</string>
+    <string name="auth_terms_prefix">Trí leanúint ar aghaidh, aontaíonn tú lenár</string>
+    <string name="auth_terms_of_service">Téarmaí Seirbhíse</string>
+    <string name="auth_and">agus</string>
+    <string name="auth_privacy_policy">Polasaí Príobháideachta</string>
+
+    <!-- Validation -->
+    <string name="validation_email_required">Tá ríomhphost ag teastáil</string>
+    <string name="validation_email_invalid">Cuir isteach ríomhphost bailí</string>
+    <string name="validation_password_required">Tá pasfhocal ag teastáil</string>
+    <string name="validation_password_min_length">Caithfidh an pasfhocal a bheith 8 gcarachtar ar a laghad</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_add_children">Cuir do pháistí leis</string>
+    <string name="onboarding_add_children_subtitle">Déanfaimid moltaí gníomhaíochtaí a phearsanú bunaithe ar a n-aoiseanna.</string>
+    <string name="onboarding_first_name">Céadainm</string>
+    <string name="onboarding_first_name_placeholder">m.sh. Ella</string>
+    <string name="onboarding_date_of_birth">Dáta breithe</string>
+    <string name="onboarding_add_another_child">Cuir páiste eile leis</string>
+    <string name="onboarding_continue">Lean ar aghaidh</string>
+    <string name="onboarding_skip">Scipeáil</string>
+    <string name="onboarding_step">Céim %1$d de %2$d</string>
+
+    <!-- Discover -->
+    <string name="discover_good_morning">Maidin mhaith, %1$s</string>
+    <string name="discover_good_afternoon">Tráthnóna maith, %1$s</string>
+    <string name="discover_good_evening">Oíche mhaith, %1$s</string>
+    <string name="discover_all_children">Gach páiste</string>
+    <string name="discover_ask_ai">Fiafraigh de KinderHub AI</string>
+    <string name="discover_ai_placeholder">snámh do mo pháiste 5 bliana maidin Dé Sathairn in aice liom</string>
+    <string name="discover_for_you">Duit féin</string>
+    <string name="discover_filters">Scagairí</string>
+    <string name="discover_ai_pick">Rogha AI</string>
+    <string name="discover_left">%1$d fágtha</string>
+    <string name="discover_per_session">/seisiún</string>
+
+    <!-- Categories -->
+    <string name="category_swimming">Snámh</string>
+    <string name="category_steam">STEAM</string>
+    <string name="category_sports">Spórt</string>
+    <string name="category_music">Ceol</string>
+    <string name="category_tutors">Teagascóirí</string>
+    <string name="category_art">Ealaín</string>
+    <string name="category_dance">Damhsa</string>
+    <string name="category_languages">Teangacha</string>
+
+    <!-- Activity Detail -->
+    <string name="activity_about">Maidir le</string>
+    <string name="activity_sessions">Seisiúin</string>
+    <string name="activity_reviews">Léirmheasanna</string>
+    <string name="activity_location">Suíomh</string>
+    <string name="activity_ages">Aoiseanna %1$d–%2$d</string>
+    <string name="activity_book_session">Cuir Seisiún in Áirithe</string>
+    <string name="activity_select_session">Roghnaigh seisiún</string>
+    <string name="activity_select_child">Roghnaigh páiste</string>
+    <string name="activity_message_provider">Teachtaireacht chuig Soláthraí</string>
+
+    <!-- Booking -->
+    <string name="booking_checkout">Seiceáil Amach</string>
+    <string name="booking_order_summary">Achoimre Ordaithe</string>
+    <string name="booking_subtotal">Fo-iomlán</string>
+    <string name="booking_service_fee">Táille seirbhíse</string>
+    <string name="booking_discount">Lascaine</string>
+    <string name="booking_total">Iomlán</string>
+    <string name="booking_promo_code">Cód promóisin</string>
+    <string name="booking_apply">Cuir i bhfeidhm</string>
+    <string name="booking_payment_method">Modh Íocaíochta</string>
+    <string name="booking_pay_now">Íoc Anois</string>
+    <string name="booking_processing">Ag próiseáil...</string>
+
+    <!-- Confirmation -->
+    <string name="confirmation_booking_confirmed">Áirithint Deimhnithe!</string>
+    <string name="confirmation_number">Deimhniú #%1$s</string>
+    <string name="confirmation_view_bookings">Féach ar Mo Chuid Áirithintí</string>
+    <string name="confirmation_back_to_discover">Ar ais go Aimsigh</string>
+
+    <!-- My Bookings -->
+    <string name="bookings_upcoming">Le teacht</string>
+    <string name="bookings_past">Caite</string>
+    <string name="bookings_no_upcoming">Níl aon áirithintí le teacht</string>
+    <string name="bookings_no_past">Níl aon áirithintí caite</string>
+    <string name="bookings_cancel">Cealaigh Áirithint</string>
+    <string name="bookings_reschedule">Athsceideal</string>
+
+    <!-- Messages -->
+    <string name="messages_title">Teachtaireachtaí</string>
+    <string name="messages_no_messages">Níl aon teachtaireachtaí fós</string>
+    <string name="messages_type_message">Clóscríobh teachtaireacht...</string>
+    <string name="messages_send">Seol</string>
+
+    <!-- Account -->
+    <string name="account_title">Cuntas</string>
+    <string name="account_children">Páistí</string>
+    <string name="account_add_child">Cuir Páiste Leis</string>
+    <string name="account_payment_methods">Modhanna Íocaíochta</string>
+    <string name="account_add_payment">Cuir Modh Íocaíochta Leis</string>
+    <string name="account_settings">Socruithe</string>
+    <string name="account_notifications">Fógraí</string>
+    <string name="account_privacy">Príobháideachas &amp; Slándáil</string>
+    <string name="account_app_settings">Socruithe Aipe</string>
+    <string name="account_support">Tacaíocht</string>
+    <string name="account_help">Ionad Cabhrach</string>
+    <string name="account_terms">Téarmaí &amp; Polasaí Príobháideachta</string>
+    <string name="account_log_out">Logáil Amach</string>
+    <string name="account_logging_out">Ag logáil amach...</string>
+    <string name="account_years_old">%1$d bliain d\'aois</string>
+    <string name="account_default">Réamhshocraithe</string>
+
+    <!-- Common -->
+    <string name="common_loading">Ag lódáil...</string>
+    <string name="common_error">Chuaigh rud éigin mícheart</string>
+    <string name="common_retry">Bain triail eile as</string>
+    <string name="common_cancel">Cealaigh</string>
+    <string name="common_save">Sábháil</string>
+    <string name="common_delete">Scrios</string>
+    <string name="common_edit">Cuir in eagar</string>
+    <string name="common_done">Déanta</string>
+    <string name="common_next">Ar aghaidh</string>
+    <string name="common_back">Ar ais</string>
+    <string name="common_close">Dún</string>
+    <string name="common_search">Cuardaigh</string>
+    <string name="common_go_back">Téigh ar ais</string>
+
+    <!-- Units -->
+    <string name="unit_miles">míle</string>
+    <string name="unit_reviews">(%1$d)</string>
+</resources>

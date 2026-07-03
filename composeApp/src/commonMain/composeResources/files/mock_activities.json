@@ -1,0 +1,134 @@
+{
+  "categories": [
+    {"id": "cat_swim", "name": "Swimming", "icon": "waves", "colorTint": "Primary"},
+    {"id": "cat_steam", "name": "STEAM", "icon": "flask-conical", "colorTint": "Success"},
+    {"id": "cat_sports", "name": "Sports", "icon": "trophy", "colorTint": "Accent"},
+    {"id": "cat_music", "name": "Music", "icon": "music", "colorTint": "Sunshine"},
+    {"id": "cat_tutors", "name": "Tutors", "icon": "graduation-cap", "colorTint": "Primary"}
+  ],
+  "aiSuggestions": [
+    {"id": "sug_1", "label": "Swim Saturdays", "query": "swimming Saturday morning"},
+    {"id": "sug_2", "label": "Half-term camps", "query": "half term holiday camp"},
+    {"id": "sug_3", "label": "After-school", "query": "after school activities near me"}
+  ],
+  "activities": [
+    {
+      "id": "act_001",
+      "title": "Little Otters Swim School",
+      "providerName": "Little Otters",
+      "category": {"id": "cat_swim", "name": "Swimming", "icon": "waves", "colorTint": "Primary"},
+      "description": "Fun, safe swimming lessons for children aged 4-6. Small class sizes with qualified instructors. Your child will learn water confidence, basic strokes, and water safety.",
+      "imagePlaceholder": "photo · kids swimming",
+      "rating": 4.9,
+      "reviewCount": 128,
+      "pricePerSession": 14.00,
+      "ageMin": 4,
+      "ageMax": 6,
+      "distance": 0.6,
+      "nextSessionDay": "Sat",
+      "nextSessionTime": "9:00am",
+      "isVerified": true,
+      "isAiPick": true,
+      "spotsLeft": null,
+      "whatIncluded": ["DBS-checked instructors", "Towels provided", "Small groups (max 6)"],
+      "sessions": [
+        {"id": "sess_001", "dayOfWeek": "Saturday", "time": "9:00am", "duration": "45 mins", "spotsLeft": 4, "totalSpots": 6, "pricePerSession": 14.00},
+        {"id": "sess_002", "dayOfWeek": "Saturday", "time": "10:00am", "duration": "45 mins", "spotsLeft": 2, "totalSpots": 6, "pricePerSession": 14.00},
+        {"id": "sess_003", "dayOfWeek": "Sunday", "time": "9:00am", "duration": "45 mins", "spotsLeft": 0, "totalSpots": 6, "pricePerSession": 14.00}
+      ]
+    },
+    {
+      "id": "act_002",
+      "title": "Code Ninjas Junior",
+      "providerName": "Code Ninjas",
+      "category": {"id": "cat_steam", "name": "STEAM", "icon": "flask-conical", "colorTint": "Success"},
+      "description": "Introduction to coding for kids. Learn through games and fun projects. Build problem-solving skills while having fun!",
+      "imagePlaceholder": "photo · kids coding",
+      "rating": 4.7,
+      "reviewCount": 89,
+      "pricePerSession": 22.00,
+      "ageMin": 5,
+      "ageMax": 8,
+      "distance": 1.2,
+      "nextSessionDay": "Wed",
+      "nextSessionTime": "4:30pm",
+      "isVerified": true,
+      "isAiPick": false,
+      "spotsLeft": 3,
+      "whatIncluded": ["All equipment provided", "Take-home projects", "Progress certificates"],
+      "sessions": [
+        {"id": "sess_004", "dayOfWeek": "Wednesday", "time": "4:30pm", "duration": "60 mins", "spotsLeft": 3, "totalSpots": 8, "pricePerSession": 22.00},
+        {"id": "sess_005", "dayOfWeek": "Saturday", "time": "11:00am", "duration": "60 mins", "spotsLeft": 5, "totalSpots": 8, "pricePerSession": 22.00}
+      ]
+    },
+    {
+      "id": "act_003",
+      "title": "Riverside Football Academy",
+      "providerName": "Riverside Sports",
+      "category": {"id": "cat_sports", "name": "Sports", "icon": "trophy", "colorTint": "Accent"},
+      "description": "Football coaching for all abilities. Focus on fun, fitness, and fundamental skills. FA qualified coaches.",
+      "imagePlaceholder": "photo · kids football",
+      "rating": 4.8,
+      "reviewCount": 156,
+      "pricePerSession": 9.00,
+      "ageMin": 5,
+      "ageMax": 11,
+      "distance": 0.8,
+      "nextSessionDay": "Sun",
+      "nextSessionTime": "10:00am",
+      "isVerified": true,
+      "isAiPick": false,
+      "spotsLeft": null,
+      "whatIncluded": ["FA qualified coaches", "All equipment provided", "Match play included"],
+      "sessions": [
+        {"id": "sess_006", "dayOfWeek": "Sunday", "time": "10:00am", "duration": "90 mins", "spotsLeft": 8, "totalSpots": 16, "pricePerSession": 9.00}
+      ]
+    },
+    {
+      "id": "act_004",
+      "title": "Bright Sparks Music",
+      "providerName": "Bright Sparks",
+      "category": {"id": "cat_music", "name": "Music", "icon": "music", "colorTint": "Sunshine"},
+      "description": "Fun music classes introducing children to rhythm, singing, and instruments. Perfect for developing musical curiosity.",
+      "imagePlaceholder": "photo · music class",
+      "rating": 4.7,
+      "reviewCount": 64,
+      "pricePerSession": 11.00,
+      "ageMin": 3,
+      "ageMax": 7,
+      "distance": 0.4,
+      "nextSessionDay": "Wed",
+      "nextSessionTime": "4:30pm",
+      "isVerified": true,
+      "isAiPick": true,
+      "spotsLeft": 2,
+      "whatIncluded": ["Instruments provided", "Songs to practice at home", "End of term performance"],
+      "sessions": [
+        {"id": "sess_007", "dayOfWeek": "Wednesday", "time": "4:30pm", "duration": "45 mins", "spotsLeft": 2, "totalSpots": 10, "pricePerSession": 11.00}
+      ]
+    },
+    {
+      "id": "act_005",
+      "title": "Splash & Play",
+      "providerName": "Aqua Fun",
+      "category": {"id": "cat_swim", "name": "Swimming", "icon": "waves", "colorTint": "Primary"},
+      "description": "Water confidence and play sessions for younger children. Parent participation welcome.",
+      "imagePlaceholder": "photo · splash play",
+      "rating": 4.6,
+      "reviewCount": 42,
+      "pricePerSession": 12.00,
+      "ageMin": 2,
+      "ageMax": 5,
+      "distance": 1.5,
+      "nextSessionDay": "Tue",
+      "nextSessionTime": "10:00am",
+      "isVerified": true,
+      "isAiPick": false,
+      "spotsLeft": null,
+      "whatIncluded": ["Parent can join", "Floats and toys provided"],
+      "sessions": [
+        {"id": "sess_008", "dayOfWeek": "Tuesday", "time": "10:00am", "duration": "30 mins", "spotsLeft": 6, "totalSpots": 8, "pricePerSession": 12.00}
+      ]
+    }
+  ]
+}

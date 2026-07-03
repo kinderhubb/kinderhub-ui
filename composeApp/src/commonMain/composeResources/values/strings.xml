@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">KinderHub</string>
+
+    <!-- Navigation -->
+    <string name="nav_discover">Discover</string>
+    <string name="nav_bookings">Bookings</string>
+    <string name="nav_my_bookings">My Bookings</string>
+    <string name="nav_messages">Messages</string>
+    <string name="nav_account">Account</string>
+
+    <!-- Auth Screen -->
+    <string name="auth_welcome_back">Welcome back</string>
+    <string name="auth_sign_in_to_continue">Sign in to continue</string>
+    <string name="auth_continue_with_apple">Continue with Apple</string>
+    <string name="auth_continue_with_google">Continue with Google</string>
+    <string name="auth_or_use_email">or use email</string>
+    <string name="auth_email">Email</string>
+    <string name="auth_email_placeholder">sarah@example.com</string>
+    <string name="auth_password">Password</string>
+    <string name="auth_password_placeholder">Enter your password</string>
+    <string name="auth_forgot_password">Forgot password?</string>
+    <string name="auth_log_in">Log in</string>
+    <string name="auth_sign_up">Sign up</string>
+    <string name="auth_no_account">Don\'t have an account?</string>
+    <string name="auth_have_account">Already have an account?</string>
+    <string name="auth_terms_prefix">By continuing, you agree to our</string>
+    <string name="auth_terms_of_service">Terms of Service</string>
+    <string name="auth_and">and</string>
+    <string name="auth_privacy_policy">Privacy Policy</string>
+
+    <!-- Validation -->
+    <string name="validation_email_required">Email is required</string>
+    <string name="validation_email_invalid">Please enter a valid email</string>
+    <string name="validation_password_required">Password is required</string>
+    <string name="validation_password_min_length">Password must be at least 8 characters</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_add_children">Add your children</string>
+    <string name="onboarding_add_children_subtitle">We\'ll personalise activity recommendations based on their ages.</string>
+    <string name="onboarding_first_name">First name</string>
+    <string name="onboarding_first_name_placeholder">e.g. Ella</string>
+    <string name="onboarding_date_of_birth">Date of birth</string>
+    <string name="onboarding_add_another_child">Add another child</string>
+    <string name="onboarding_continue">Continue</string>
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_step">Step %1$d of %2$d</string>
+
+    <!-- Discover -->
+    <string name="discover_good_morning">Good morning, %1$s</string>
+    <string name="discover_good_afternoon">Good afternoon, %1$s</string>
+    <string name="discover_good_evening">Good evening, %1$s</string>
+    <string name="discover_all_children">All children</string>
+    <string name="discover_ask_ai">Ask KinderHub AI</string>
+    <string name="discover_ai_placeholder">swimming for my 5-year-old on Saturday mornings near me</string>
+    <string name="discover_for_you">For you</string>
+    <string name="discover_filters">Filters</string>
+    <string name="discover_ai_pick">AI pick</string>
+    <string name="discover_left">%1$d left</string>
+    <string name="discover_per_session">/session</string>
+
+    <!-- Categories -->
+    <string name="category_swimming">Swimming</string>
+    <string name="category_steam">STEAM</string>
+    <string name="category_sports">Sports</string>
+    <string name="category_music">Music</string>
+    <string name="category_tutors">Tutors</string>
+    <string name="category_art">Art</string>
+    <string name="category_dance">Dance</string>
+    <string name="category_languages">Languages</string>
+
+    <!-- Activity Detail -->
+    <string name="activity_about">About</string>
+    <string name="activity_sessions">Sessions</string>
+    <string name="activity_reviews">Reviews</string>
+    <string name="activity_location">Location</string>
+    <string name="activity_ages">Ages %1$d–%2$d</string>
+    <string name="activity_book_session">Book Session</string>
+    <string name="activity_select_session">Select a session</string>
+    <string name="activity_select_child">Select child</string>
+    <string name="activity_message_provider">Message Provider</string>
+
+    <!-- Booking -->
+    <string name="booking_checkout">Checkout</string>
+    <string name="booking_order_summary">Order Summary</string>
+    <string name="booking_subtotal">Subtotal</string>
+    <string name="booking_service_fee">Service fee</string>
+    <string name="booking_discount">Discount</string>
+    <string name="booking_total">Total</string>
+    <string name="booking_promo_code">Promo code</string>
+    <string name="booking_apply">Apply</string>
+    <string name="booking_payment_method">Payment Method</string>
+    <string name="booking_pay_now">Pay Now</string>
+    <string name="booking_processing">Processing...</string>
+
+    <!-- Confirmation -->
+    <string name="confirmation_booking_confirmed">Booking Confirmed!</string>
+    <string name="confirmation_number">Confirmation #%1$s</string>
+    <string name="confirmation_view_bookings">View My Bookings</string>
+    <string name="confirmation_back_to_discover">Back to Discover</string>
+
+    <!-- My Bookings -->
+    <string name="bookings_upcoming">Upcoming</string>
+    <string name="bookings_past">Past</string>
+    <string name="bookings_no_upcoming">No upcoming bookings</string>
+    <string name="bookings_no_past">No past bookings</string>
+    <string name="bookings_cancel">Cancel Booking</string>
+    <string name="bookings_reschedule">Reschedule</string>
+
+    <!-- Messages -->
+    <string name="messages_title">Messages</string>
+    <string name="messages_no_messages">No messages yet</string>
+    <string name="messages_type_message">Type a message...</string>
+    <string name="messages_send">Send</string>
+
+    <!-- Account -->
+    <string name="account_title">Account</string>
+    <string name="account_children">Children</string>
+    <string name="account_add_child">Add Child</string>
+    <string name="account_payment_methods">Payment Methods</string>
+    <string name="account_add_payment">Add Payment Method</string>
+    <string name="account_settings">Settings</string>
+    <string name="account_notifications">Notifications</string>
+    <string name="account_privacy">Privacy &amp; Security</string>
+    <string name="account_app_settings">App Settings</string>
+    <string name="account_support">Support</string>
+    <string name="account_help">Help Centre</string>
+    <string name="account_terms">Terms &amp; Privacy Policy</string>
+    <string name="account_log_out">Log Out</string>
+    <string name="account_logging_out">Logging out...</string>
+    <string name="account_years_old">%1$d years old</string>
+    <string name="account_default">Default</string>
+
+    <!-- Common -->
+    <string name="common_loading">Loading...</string>
+    <string name="common_error">Something went wrong</string>
+    <string name="common_retry">Retry</string>
+    <string name="common_cancel">Cancel</string>
+    <string name="common_save">Save</string>
+    <string name="common_delete">Delete</string>
+    <string name="common_edit">Edit</string>
+    <string name="common_done">Done</string>
+    <string name="common_next">Next</string>
+    <string name="common_back">Back</string>
+    <string name="common_close">Close</string>
+    <string name="common_search">Search</string>
+    <string name="common_go_back">Go Back</string>
+
+    <!-- Units -->
+    <string name="unit_miles">mi</string>
+    <string name="unit_reviews">(%1$d)</string>
+</resources>

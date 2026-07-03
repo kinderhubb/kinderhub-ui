@@ -1,0 +1,22 @@
+{
+  "name": "kinderhub-ui",
+  "version": "1.0.0",
+  "description": "A Kotlin Compose Multiplatform application for discovering, booking, and managing children's activities. Built with a single codebase targeting Android, iOS, and Web (WebAssembly).",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:ui": "npx playwright test --ui",
+    "test:headed": "npx playwright test --headed",
+    "test:mobile": "npx playwright test --project=mobile",
+    "test:desktop": "npx playwright test --project=desktop",
+    "test:visual": "npx playwright test e2e/visual-regression.spec.js",
+    "test:report": "npx playwright show-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "playwright": "^1.61.1"
+  }
+}
