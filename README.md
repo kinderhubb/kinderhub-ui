@@ -2,6 +2,16 @@
 
 A Kotlin Compose Multiplatform application for discovering, booking, and managing children's activities. Built with a single codebase targeting Android, iOS, and Web (WebAssembly).
 
+> **AI-Driven Development:** This repository is configured for autonomous AI development. See [CLAUDE.md](CLAUDE.md) for AI agent instructions and [docs/](docs/) for product documentation.
+
+## Quick Links
+
+- [Vision & Mission](docs/vision.md)
+- [Roadmap](docs/roadmap.md)
+- [Architecture](architecture/system-overview.md)
+- [Current Backlog](backlog/now.md)
+- [AI Agent Instructions](.github/agent-instructions.md)
+
 ## Tech Stack
 
 - **Kotlin** 2.1.0

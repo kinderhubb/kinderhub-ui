@@ -46,7 +46,6 @@ dist/
 *.log
 
 # Test
-reports/
 test-results/
 playwright-report/
 e2e-screenshots/
