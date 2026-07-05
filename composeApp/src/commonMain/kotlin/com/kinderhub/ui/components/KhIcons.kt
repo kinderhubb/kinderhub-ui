@@ -658,3 +658,31 @@ fun IconGlobe(
         tint = color
     )
 }
+
+@Composable
+fun IconPalette(
+    modifier: Modifier = Modifier,
+    color: Color = Color.Black,
+    size: Dp = 24.dp
+) {
+    Icon(
+        imageVector = Icons.Outlined.Tune,
+        contentDescription = "Theme",
+        modifier = modifier.size(size),
+        tint = color
+    )
+}
+
+@Composable
+fun IconTrash(
+    modifier: Modifier = Modifier,
+    color: Color = Color.Black,
+    size: Dp = 24.dp
+) {
+    Icon(
+        imageVector = Icons.Outlined.Close,
+        contentDescription = "Delete",
+        modifier = modifier.size(size),
+        tint = color
+    )
+}

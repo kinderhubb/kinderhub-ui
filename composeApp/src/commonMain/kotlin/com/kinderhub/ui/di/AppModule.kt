@@ -75,7 +75,7 @@ val viewModelModule = module {
     viewModel { ThreadViewModel(get()) }
 
     // Account
-    viewModel { AccountViewModel(get()) }
+    viewModel { AccountViewModel(get(), get()) }
 }
 
 /**

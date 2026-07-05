@@ -31,6 +31,7 @@ import com.kinderhub.ui.screens.messages.MessagesScreen
 import com.kinderhub.ui.screens.messages.ThreadScreen
 import com.kinderhub.ui.screens.search.SearchScreen
 import com.kinderhub.ui.screens.settings.LanguageSettingsScreen
+import com.kinderhub.ui.screens.settings.ThemeSettingsScreen
 
 /**
  * App navigation routes
@@ -58,6 +59,7 @@ object Routes {
     const val HELP = "help"
     const val TERMS = "terms"
     const val LANGUAGE = "language"
+    const val THEME = "theme"
 
     fun activityDetail(activityId: String) = "activity/$activityId"
     fun editChild(childId: String) = "edit_child/$childId"
@@ -380,6 +382,7 @@ fun KinderHubNavHost(
                         itemId == "help" -> navController.navigate(Routes.HELP)
                         itemId == "terms" -> navController.navigate(Routes.TERMS)
                         itemId == "language" -> navController.navigate(Routes.LANGUAGE)
+                        itemId == "theme" -> navController.navigate(Routes.THEME)
                         itemId == "edit_profile" -> navController.navigate(Routes.SETTINGS) // TODO: Add profile edit
                     }
                 }
@@ -458,6 +461,13 @@ fun KinderHubNavHost(
         // Language Settings
         composable(Routes.LANGUAGE) {
             LanguageSettingsScreen(
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        // Theme Settings
+        composable(Routes.THEME) {
+            ThemeSettingsScreen(
                 onBack = { navController.popBackStack() }
             )
         }

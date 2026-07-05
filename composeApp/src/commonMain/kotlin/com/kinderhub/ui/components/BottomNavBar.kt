@@ -1,7 +1,13 @@
 package com.kinderhub.ui.components
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,17 +19,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.kinderhub.ui.theme.IndicatorStyle
 import com.kinderhub.ui.theme.KhTheme
-import com.kinderhub.ui.theme.Shapes
-import com.kinderhub.ui.theme.Size
-import com.kinderhub.ui.theme.Space
 
 @Composable
 fun BottomNavBar(
@@ -35,44 +43,48 @@ fun BottomNavBar(
     onAccountClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val c = KhTheme.colors
-    val typography = KhTheme.typography
+    val colors = KhTheme.colors
+    val dimensions = KhTheme.dimensions
+    val navStyle = KhTheme.componentStyles.navigationStyle
 
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(Size.bottomNavHeight)
-            .background(c.surface)
+            .height(dimensions.bottomNavHeight)
+            .background(colors.surface)
             .drawBehind {
                 drawLine(
-                    color = c.bd,
+                    color = colors.bd,
                     start = Offset(0f, 0f),
                     end = Offset(size.width, 0f),
-                    strokeWidth = 1.dp.toPx()
+                    strokeWidth = dimensions.dividerThickness.toPx()
                 )
             }
-            .padding(horizontal = Space.s12, vertical = Space.s10)
+            .padding(
+                horizontal = dimensions.spacingMd,
+                vertical = dimensions.spacingSm
+            )
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             NavItem(
-                icon = { color -> IconCompass(color = color, size = 23.dp) },
+                icon = { color -> IconCompass(color = color, size = dimensions.iconSizeLg) },
                 label = "Discover",
                 isSelected = selectedTab == 0,
                 onClick = onDiscoverClick
             )
 
             NavItem(
-                icon = { color -> IconCalendarCheck(color = color, size = 23.dp) },
+                icon = { color -> IconCalendarCheck(color = color, size = dimensions.iconSizeLg) },
                 label = "Bookings",
                 isSelected = selectedTab == 1,
                 onClick = onBookingsClick
             )
 
             NavItem(
-                icon = { color -> IconMessageCircle(color = color, size = 23.dp) },
+                icon = { color -> IconMessageCircle(color = color, size = dimensions.iconSizeLg) },
                 label = "Messages",
                 isSelected = selectedTab == 2,
                 onClick = onMessagesClick,
@@ -80,7 +92,7 @@ fun BottomNavBar(
             )
 
             NavItem(
-                icon = { color -> IconUser(color = color, size = 23.dp) },
+                icon = { color -> IconUser(color = color, size = dimensions.iconSizeLg) },
                 label = "Account",
                 isSelected = selectedTab == 3,
                 onClick = onAccountClick
@@ -97,38 +109,111 @@ private fun NavItem(
     onClick: () -> Unit,
     badgeCount: Int = 0
 ) {
-    val c = KhTheme.colors
+    val colors = KhTheme.colors
     val typography = KhTheme.typography
-    val color = if (isSelected) c.p6 else c.tx3
+    val dimensions = KhTheme.dimensions
+    val shapes = KhTheme.shapes
+    val motion = KhTheme.motion
+    val navStyle = KhTheme.componentStyles.navigationStyle
+
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+
+    // Theme-aware animations
+    val scale by animateFloatAsState(
+        targetValue = if (isPressed && motion.enableAnimations) 0.9f else 1f,
+        animationSpec = if (motion.useSpringAnimations) {
+            spring(stiffness = motion.springStiffness)
+        } else {
+            tween(durationMillis = motion.durationFast)
+        }
+    )
+
+    val iconColor by animateColorAsState(
+        targetValue = if (isSelected) colors.p6 else colors.tx3,
+        animationSpec = tween(durationMillis = motion.durationMedium)
+    )
+
+    val labelColor by animateColorAsState(
+        targetValue = if (isSelected) colors.p6 else colors.tx3,
+        animationSpec = tween(durationMillis = motion.durationMedium)
+    )
+
+    // Indicator background color
+    val indicatorColor by animateColorAsState(
+        targetValue = if (isSelected && navStyle.useIndicator) colors.p50 else Color.Transparent,
+        animationSpec = tween(durationMillis = motion.durationMedium)
+    )
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .clickable { onClick() }
-            .padding(horizontal = Space.s8)
+            .scale(scale)
+            .clickable(
+                interactionSource = interactionSource,
+                indication = null,
+                onClick = onClick
+            )
+            .padding(horizontal = dimensions.spacingSm)
     ) {
-        Box {
-            icon(color)
+        // Icon with indicator
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .then(
+                    when (navStyle.indicatorStyle) {
+                        IndicatorStyle.Pill -> Modifier
+                            .clip(shapes.chipShape)
+                            .background(indicatorColor)
+                            .padding(
+                                horizontal = dimensions.spacingMd,
+                                vertical = dimensions.spacingXs
+                            )
+                        IndicatorStyle.Background -> Modifier
+                            .clip(shapes.buttonShape)
+                            .background(indicatorColor)
+                            .padding(dimensions.spacingSm)
+                        else -> Modifier
+                    }
+                )
+        ) {
+            icon(iconColor)
 
             // Badge
             if (badgeCount > 0) {
                 Box(
                     modifier = Modifier
-                        .size(8.dp)
-                        .offset(x = 12.dp, y = (-2).dp)
-                        .background(c.ac, Shapes.pill)
+                        .size(dimensions.spacingSm)
+                        .offset(
+                            x = dimensions.iconSizeMd / 2,
+                            y = -(dimensions.spacingXs)
+                        )
+                        .background(colors.ac, shapes.avatarShape)
                         .align(Alignment.TopEnd)
                 )
             }
         }
 
-        Text(
-            text = label,
-            style = typography.small.copy(
-                fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Medium
-            ),
-            color = color,
-            modifier = Modifier.padding(top = 4.dp)
-        )
+        // Underline indicator
+        if (navStyle.indicatorStyle == IndicatorStyle.Underline && isSelected && navStyle.useIndicator) {
+            Box(
+                modifier = Modifier
+                    .padding(top = dimensions.spacingXs)
+                    .size(width = dimensions.iconSizeLg, height = dimensions.borderWidthFocused)
+                    .background(colors.p6, shapes.chipShape)
+            )
+        }
+
+        // Label (if enabled in theme)
+        if (navStyle.showLabels) {
+            Text(
+                text = label,
+                style = typography.xs.copy(
+                    fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Medium
+                ),
+                color = labelColor,
+                modifier = Modifier.padding(top = dimensions.spacingXs)
+            )
+        }
     }
 }

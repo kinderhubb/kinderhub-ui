@@ -39,6 +39,7 @@ import com.kinderhub.ui.components.IconLogOut
 import com.kinderhub.ui.components.IconSettings
 import com.kinderhub.ui.components.IconShield
 import com.kinderhub.ui.components.IconUsers
+import com.kinderhub.ui.components.IconPalette
 import com.kinderhub.ui.util.AppStrings
 import com.kinderhub.ui.util.Strings
 import com.kinderhub.ui.components.LayoutMode
@@ -68,6 +69,7 @@ object AccountMenuIds {
     const val PRIVACY = "privacy"
     const val SETTINGS = "settings"
     const val LANGUAGE = "language"
+    const val THEME = "theme"
     const val HELP = "help"
     const val TERMS = "terms"
     const val LOGOUT = "logout"
@@ -105,6 +107,12 @@ fun AccountScreen(
             id = AccountMenuIds.LANGUAGE,
             title = "Language",
             icon = { color, size -> IconGlobe(color = color, size = size) }
+        ),
+        MenuItem(
+            id = AccountMenuIds.THEME,
+            title = "Theme",
+            subtitle = "Change app appearance",
+            icon = { color, size -> IconPalette(color = color, size = size) }
         ),
         MenuItem(
             id = AccountMenuIds.SETTINGS,

@@ -1,11 +1,19 @@
 package com.kinderhub.ui.components
 
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -13,9 +21,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -24,12 +35,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kinderhub.ui.data.model.Activity
-import com.kinderhub.ui.util.formatDistance
-import com.kinderhub.ui.util.formatRating
 import com.kinderhub.ui.data.model.CategoryColorTint
 import com.kinderhub.ui.theme.KhTheme
-import com.kinderhub.ui.theme.Shapes
-import com.kinderhub.ui.theme.Space
+import com.kinderhub.ui.util.formatDistance
+import com.kinderhub.ui.util.formatRating
 
 @Composable
 fun ActivityCard(
@@ -39,30 +48,78 @@ fun ActivityCard(
     modifier: Modifier = Modifier,
     isCompact: Boolean = false
 ) {
-    val c = KhTheme.colors
+    val colors = KhTheme.colors
     val typography = KhTheme.typography
+    val dimensions = KhTheme.dimensions
+    val shapes = KhTheme.shapes
+    val motion = KhTheme.motion
+    val cardStyle = KhTheme.componentStyles.cardStyle
 
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+
+    // Theme-aware press animation
+    val scale by animateFloatAsState(
+        targetValue = if (isPressed && motion.enableAnimations) 0.98f else 1f,
+        animationSpec = if (motion.useSpringAnimations) {
+            spring(stiffness = motion.springStiffness, dampingRatio = motion.springDamping / 100f)
+        } else {
+            tween(durationMillis = motion.durationFast)
+        }
+    )
+
+    // Category-based placeholder colors
     val placeholderColor = when (activity.category.colorTint) {
-        CategoryColorTint.Primary -> c.p100 to c.p50
-        CategoryColorTint.Success -> c.succ50 to c.succ50
-        CategoryColorTint.Accent -> c.ac50 to c.ac100
-        CategoryColorTint.Sunshine -> c.sun50 to c.sun100
+        CategoryColorTint.Primary -> colors.p100 to colors.p50
+        CategoryColorTint.Success -> colors.succ50 to colors.succ50
+        CategoryColorTint.Accent -> colors.ac50 to colors.ac100
+        CategoryColorTint.Sunshine -> colors.sun50 to colors.sun100
+    }
+
+    // Theme-aware image height
+    val imageHeight = if (isCompact) {
+        dimensions.cardImageHeight * 0.6f
+    } else {
+        dimensions.cardImageHeight
     }
 
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .shadow(4.dp, Shapes.lg)
-            .clip(Shapes.lg)
-            .background(c.surface)
-            .clickable { onClick() }
+            .scale(scale)
+            .then(
+                if (cardStyle.useShadow) {
+                    Modifier.shadow(
+                        elevation = dimensions.cardElevation,
+                        shape = shapes.cardShape,
+                        clip = false
+                    )
+                } else Modifier
+            )
+            .clip(shapes.cardShape)
+            .background(colors.surface)
+            .then(
+                if (cardStyle.useBorder) {
+                    Modifier.border(
+                        width = dimensions.borderWidth,
+                        color = colors.bd,
+                        shape = shapes.cardShape
+                    )
+                } else Modifier
+            )
+            .clickable(
+                interactionSource = interactionSource,
+                indication = null,
+                onClick = onClick
+            )
     ) {
         Column {
-            // Image placeholder
+            // Image area
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(if (isCompact) 100.dp else 150.dp)
+                    .height(imageHeight)
+                    .clip(shapes.imageShape)
                     .background(
                         Brush.linearGradient(
                             colors = listOf(placeholderColor.first, placeholderColor.second),
@@ -79,33 +136,52 @@ fun ActivityCard(
                         fontFamily = FontFamily.Monospace,
                         fontSize = 11.sp
                     ),
-                    color = c.p6.copy(alpha = 0.7f),
+                    color = colors.p6.copy(alpha = 0.7f),
                     modifier = Modifier
                         .background(
                             Color.White.copy(alpha = 0.7f),
-                            Shapes.sm
+                            shapes.chipShape
                         )
-                        .padding(horizontal = 8.dp, vertical = 3.dp)
+                        .padding(horizontal = dimensions.spacingSm, vertical = dimensions.spacingXs)
                 )
+
+                // Overlay gradient (if theme uses it)
+                if (cardStyle.useOverlay) {
+                    Box(
+                        modifier = Modifier
+                            .matchParentSize()
+                            .background(
+                                Brush.verticalGradient(
+                                    colors = listOf(
+                                        Color.Transparent,
+                                        Color.Black.copy(alpha = 0.3f)
+                                    )
+                                )
+                            )
+                    )
+                }
 
                 // AI Pick badge
                 if (activity.isAiPick) {
                     Box(
                         modifier = Modifier
                             .align(Alignment.TopStart)
-                            .padding(Space.s12)
+                            .padding(dimensions.spacingMd)
                             .background(
                                 KhTheme.aiGradient(),
-                                Shapes.pill
+                                shapes.chipShape
                             )
-                            .padding(horizontal = 9.dp, vertical = 5.dp)
+                            .padding(
+                                horizontal = dimensions.spacingSm,
+                                vertical = dimensions.spacingXs
+                            )
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            IconSparkles(color = Color.White, size = 12.dp)
-                            Spacer(modifier = Modifier.width(5.dp))
+                            IconSparkles(color = Color.White, size = dimensions.iconSizeSm)
+                            Spacer(modifier = Modifier.width(dimensions.spacingXs))
                             Text(
                                 text = "AI pick",
-                                style = typography.small.copy(fontSize = 11.sp),
+                                style = typography.xs,
                                 color = Color.White,
                                 fontWeight = FontWeight.Bold
                             )
@@ -119,17 +195,25 @@ fun ActivityCard(
                         Box(
                             modifier = Modifier
                                 .align(Alignment.TopStart)
-                                .padding(start = if (activity.isAiPick) 100.dp else Space.s12, top = Space.s12)
-                                .background(
-                                    if (spots == 0) c.errorBg else c.warn50,
-                                    Shapes.pill
+                                .padding(
+                                    start = if (activity.isAiPick) {
+                                        dimensions.spacingMd + 85.dp
+                                    } else dimensions.spacingMd,
+                                    top = dimensions.spacingMd
                                 )
-                                .padding(horizontal = 8.dp, vertical = 4.dp)
+                                .background(
+                                    if (spots == 0) colors.errorBg else colors.warn50,
+                                    shapes.chipShape
+                                )
+                                .padding(
+                                    horizontal = dimensions.spacingSm,
+                                    vertical = dimensions.spacingXs
+                                )
                         ) {
                             Text(
                                 text = if (spots == 0) "Fully booked" else "$spots left",
-                                style = typography.small.copy(fontSize = 11.sp),
-                                color = if (spots == 0) c.error else c.warn,
+                                style = typography.xs,
+                                color = if (spots == 0) colors.error else colors.warn,
                                 fontWeight = FontWeight.SemiBold
                             )
                         }
@@ -140,68 +224,80 @@ fun ActivityCard(
                 Box(
                     modifier = Modifier
                         .align(Alignment.TopEnd)
-                        .padding(Space.s12)
-                        .size(34.dp)
+                        .padding(dimensions.spacingMd)
+                        .size(dimensions.touchTarget * 0.8f)
                         .background(
                             Color.White.copy(alpha = 0.92f),
-                            Shapes.pill
+                            shapes.avatarShape
                         )
                         .clickable { onFavoriteClick() },
                     contentAlignment = Alignment.Center
                 ) {
-                    IconHeart(color = c.ac7, size = 18.dp)
+                    IconHeart(
+                        color = colors.ac7,
+                        size = dimensions.iconSizeMd
+                    )
                 }
             }
 
-            // Content
-            Column(modifier = Modifier.padding(Space.s14)) {
+            // Content area
+            Column(
+                modifier = Modifier.padding(dimensions.cardPadding)
+            ) {
                 // Title with verified badge
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         text = activity.title,
                         style = typography.bodyLg,
-                        color = c.tx,
+                        color = colors.tx,
                         fontWeight = FontWeight.SemiBold,
                         modifier = Modifier.weight(1f, fill = false)
                     )
                     if (activity.isVerified) {
-                        Spacer(modifier = Modifier.width(Space.s8))
-                        IconBadgeCheck(color = c.p6, size = 17.dp)
+                        Spacer(modifier = Modifier.width(dimensions.spacingSm))
+                        IconBadgeCheck(
+                            color = colors.p6,
+                            size = dimensions.iconSizeMd
+                        )
                     }
                 }
 
-                Spacer(modifier = Modifier.height(Space.s4))
+                Spacer(modifier = Modifier.height(dimensions.spacingXs))
 
                 // Meta info
                 Text(
                     text = "${activity.nextSessionDay} ${activity.nextSessionTime} · ${formatDistance(activity.distance)} mi · Ages ${activity.ageMin}–${activity.ageMax}",
                     style = typography.small,
-                    color = c.tx3b
+                    color = colors.tx3b
                 )
 
-                Spacer(modifier = Modifier.height(Space.s12))
+                Spacer(modifier = Modifier.height(cardStyle.contentSpacing))
 
                 // Rating and price
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = androidx.compose.foundation.layout.Arrangement.SpaceBetween,
+                    horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     // Rating
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        IconStar(color = c.sun, filled = true, size = 15.dp)
-                        Spacer(modifier = Modifier.width(4.dp))
+                        IconStar(
+                            color = colors.sun,
+                            filled = true,
+                            size = dimensions.iconSizeSm
+                        )
+                        Spacer(modifier = Modifier.width(dimensions.spacingXs))
                         Text(
                             text = formatRating(activity.rating),
                             style = typography.small,
-                            color = c.tx2,
+                            color = colors.tx2,
                             fontWeight = FontWeight.Medium
                         )
-                        Spacer(modifier = Modifier.width(4.dp))
+                        Spacer(modifier = Modifier.width(dimensions.spacingXs))
                         Text(
                             text = "(${activity.reviewCount})",
                             style = typography.small,
-                            color = c.tx3
+                            color = colors.tx3
                         )
                     }
 
@@ -210,17 +306,105 @@ fun ActivityCard(
                         Text(
                             text = "${activity.currency}${activity.pricePerSession.toInt()}",
                             style = typography.h3,
-                            color = c.tx,
+                            color = colors.tx,
                             fontWeight = FontWeight.Bold
                         )
                         Text(
                             text = " /session",
                             style = typography.small,
-                            color = c.tx3
+                            color = colors.tx3
                         )
                     }
                 }
             }
         }
+    }
+}
+
+/**
+ * Horizontal compact activity card for lists
+ */
+@Composable
+fun ActivityCardHorizontal(
+    activity: Activity,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val colors = KhTheme.colors
+    val typography = KhTheme.typography
+    val dimensions = KhTheme.dimensions
+    val shapes = KhTheme.shapes
+    val cardStyle = KhTheme.componentStyles.cardStyle
+
+    val placeholderColor = when (activity.category.colorTint) {
+        CategoryColorTint.Primary -> colors.p100 to colors.p50
+        CategoryColorTint.Success -> colors.succ50 to colors.succ50
+        CategoryColorTint.Accent -> colors.ac50 to colors.ac100
+        CategoryColorTint.Sunshine -> colors.sun50 to colors.sun100
+    }
+
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .then(
+                if (cardStyle.useShadow) {
+                    Modifier.shadow(dimensions.cardElevation / 2, shapes.cardShape)
+                } else Modifier
+            )
+            .clip(shapes.cardShape)
+            .background(colors.surface)
+            .then(
+                if (cardStyle.useBorder) {
+                    Modifier.border(dimensions.borderWidth, colors.bd, shapes.cardShape)
+                } else Modifier
+            )
+            .clickable { onClick() }
+            .padding(dimensions.spacingSm),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        // Thumbnail
+        Box(
+            modifier = Modifier
+                .size(dimensions.avatarLg)
+                .clip(shapes.imageShape)
+                .background(
+                    Brush.linearGradient(
+                        colors = listOf(placeholderColor.first, placeholderColor.second)
+                    )
+                ),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = activity.category.icon,
+                fontSize = 20.sp
+            )
+        }
+
+        Spacer(modifier = Modifier.width(dimensions.spacingMd))
+
+        // Content
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                text = activity.title,
+                style = typography.body,
+                color = colors.tx,
+                fontWeight = FontWeight.SemiBold,
+                maxLines = 1
+            )
+            Spacer(modifier = Modifier.height(dimensions.spacingXs))
+            Text(
+                text = "${activity.nextSessionDay} · ${formatDistance(activity.distance)} mi",
+                style = typography.small,
+                color = colors.tx3
+            )
+        }
+
+        // Price
+        Text(
+            text = "${activity.currency}${activity.pricePerSession.toInt()}",
+            style = typography.h3,
+            color = colors.p6,
+            fontWeight = FontWeight.Bold
+        )
     }
 }

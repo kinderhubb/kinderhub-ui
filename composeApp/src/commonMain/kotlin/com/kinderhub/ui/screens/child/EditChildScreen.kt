@@ -254,7 +254,7 @@ fun EditChildScreen(
                             val dateOfBirth = "$year-${month.padStart(2, '0')}-${day.padStart(2, '0')}"
                             val age = calculateAge(year.toIntOrNull() ?: 2020)
                             val updatedChild = Child(
-                                id = child?.id ?: "new-${System.currentTimeMillis()}",
+                                id = child?.id ?: "new-${kotlin.random.Random.nextLong()}",
                                 firstName = firstName,
                                 dateOfBirth = dateOfBirth,
                                 age = age,
