@@ -31,8 +31,8 @@ import com.kinderhub.ui.screens.messages.MessagesScreen
 import com.kinderhub.ui.screens.messages.ThreadScreen
 import com.kinderhub.ui.screens.search.SearchScreen
 import com.kinderhub.ui.screens.settings.LanguageSettingsScreen
+import com.kinderhub.ui.screens.settings.M3ThemeSettingsScreen
 import com.kinderhub.ui.screens.settings.SettingsScreen
-import com.kinderhub.ui.screens.settings.ThemeSettingsScreen
 
 /**
  * App navigation routes
@@ -473,9 +473,9 @@ fun KinderHubNavHost(
             )
         }
 
-        // Theme Settings
+        // Theme Settings (Material 3)
         composable(Routes.THEME) {
-            ThemeSettingsScreen(
+            M3ThemeSettingsScreen(
                 onBack = { navController.popBackStack() }
             )
         }

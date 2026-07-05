@@ -1,75 +1,54 @@
 package com.kinderhub.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.kinderhub.ui.navigation.KinderHubNavHost
-import com.kinderhub.ui.theme.AppTheme
-import com.kinderhub.ui.theme.KhTheme
-import com.kinderhub.ui.theme.KinderHubTheme
-import com.kinderhub.ui.theme.Palette
-import com.kinderhub.ui.theme.ThemeManager
+import com.kinderhub.ui.theme.KinderHubM3Theme
+import com.kinderhub.ui.theme.M3ThemeManager
+import com.kinderhub.ui.theme.M3ThemeVariant
 import com.kinderhub.ui.util.AppLanguage
 import com.kinderhub.ui.util.LocalizationProvider
 import org.koin.compose.KoinContext
 
 /**
- * Main App composable with dynamic theme support
+ * Main App composable with Material 3 theme support
  *
- * The theme can be changed at runtime via ThemeManager.setTheme()
- * and the entire UI will update to reflect the new theme's:
- * - Colors
- * - Typography
- * - Spacing and dimensions
- * - Shapes and corner radii
- * - Animation settings
- * - Component styles
+ * The theme can be changed at runtime via M3ThemeManager.setVariant()
+ * Supports both light and dark mode with 6 color schemes:
+ * - Playful (Pink/Purple)
+ * - Ocean (Blue/Cyan)
+ * - Forest (Green/Teal)
+ * - Sunset (Orange/Red)
+ * - Lavender (Purple/Violet)
+ * - Monochrome (Gray/Black)
  */
 @Composable
 fun App(
-    initialTheme: AppTheme = AppTheme.Playful,
+    initialVariant: M3ThemeVariant = M3ThemeVariant.Ocean,
     initialLanguage: AppLanguage = AppLanguage.English
 ) {
-    // Observe theme changes from ThemeManager
-    val currentTheme by ThemeManager.currentTheme.collectAsState()
+    // Observe theme changes from M3ThemeManager
+    val currentVariant by M3ThemeManager.currentVariant.collectAsState()
+    val isDarkMode by M3ThemeManager.isDarkMode.collectAsState()
 
     KoinContext {
         LocalizationProvider(initialLanguage = initialLanguage) {
-            KinderHubTheme(theme = currentTheme) {
+            KinderHubM3Theme(
+                variant = currentVariant,
+                darkTheme = isDarkMode
+            ) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = KhTheme.colors.bg
+                    color = MaterialTheme.colorScheme.background
                 ) {
                     KinderHubNavHost()
                 }
             }
         }
     }
-}
-
-/**
- * Legacy App composable for backward compatibility
- * @deprecated Use App(initialTheme: AppTheme) instead
- */
-@Deprecated(
-    message = "Use App with AppTheme parameter instead",
-    replaceWith = ReplaceWith("App(initialTheme = AppTheme.Playful, initialLanguage = initialLanguage)")
-)
-@Composable
-fun App(
-    palette: Palette,
-    initialLanguage: AppLanguage = AppLanguage.English
-) {
-    // Map old palette to new theme
-    val theme = when (palette) {
-        Palette.DuskyRose -> AppTheme.Cozy
-        Palette.WarmEnglish -> AppTheme.Professional
-        Palette.Heritage -> AppTheme.Cozy
-        Palette.TrustBlue -> AppTheme.Modern
-    }
-
-    App(initialTheme = theme, initialLanguage = initialLanguage)
 }
