@@ -55,5 +55,5 @@ screenshots/
 *.tmp
 *.bak
 
-# Claude local settings
+# Claude local settings (project settings.json is committed)
 .claude/settings.local.json
