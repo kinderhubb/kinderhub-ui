@@ -31,6 +31,7 @@ import com.kinderhub.ui.screens.messages.MessagesScreen
 import com.kinderhub.ui.screens.messages.ThreadScreen
 import com.kinderhub.ui.screens.search.SearchScreen
 import com.kinderhub.ui.screens.settings.LanguageSettingsScreen
+import com.kinderhub.ui.screens.settings.SettingsScreen
 import com.kinderhub.ui.screens.settings.ThemeSettingsScreen
 
 /**
@@ -449,7 +450,14 @@ fun KinderHubNavHost(
             PlaceholderScreen(title = "Privacy & Security", navController = navController)
         }
         composable(Routes.SETTINGS) {
-            PlaceholderScreen(title = "App Settings", navController = navController)
+            SettingsScreen(
+                onBack = { navController.popBackStack() },
+                onThemeClick = { navController.navigate(Routes.THEME) },
+                onLanguageClick = { navController.navigate(Routes.LANGUAGE) },
+                onNotificationsClick = { navController.navigate(Routes.NOTIFICATIONS) },
+                onPrivacyClick = { navController.navigate(Routes.PRIVACY) },
+                onHelpClick = { navController.navigate(Routes.HELP) }
+            )
         }
         composable(Routes.HELP) {
             PlaceholderScreen(title = "Help Centre", navController = navController)
